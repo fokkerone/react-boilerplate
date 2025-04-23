@@ -1,14 +1,11 @@
 import { config } from '../config';
+import { dataMockList } from '@/features/data-grid/store/tabelle.mocks.spec';
 import { http, HttpResponse } from 'msw';
 
-export const usersHandlers = [
-  http.get<any, any>(`${config.API_URL}/users`, () => {
+export const datatableHandlers = [
+  http.get<any, any>(`${config.API_URL}/tabelledata`, () => {
     try {
-      return HttpResponse.json({
-        id: '08154711',
-        name: 'Maxim',
-        surname: 'Chartier',
-      });
+      return HttpResponse.json(dataMockList);
     } catch (error: any) {
       return HttpResponse.json(
         { message: error?.message || 'Server Error' },
