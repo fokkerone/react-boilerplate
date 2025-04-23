@@ -20,7 +20,7 @@ describe('Header', () => {
       />,
     );
 
-    expect(screen.getByText(/react boilerplate/i)).toBeInTheDocument();
+    expect(screen.getByText(/CURT Boilerplate/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute(
       'href',
       '/',

@@ -2,6 +2,8 @@ import { handlers } from '../src/test/handlers';
 import * as matchers from '@testing-library/jest-dom/matchers';
 import { cleanup } from '@testing-library/react';
 import { setupServer } from 'msw/node';
+import 'vitest';
+import { expect, beforeAll, afterEach, afterAll } from 'vitest';
 
 expect.extend(matchers);
 declare let window;
