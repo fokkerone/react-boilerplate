@@ -25,6 +25,7 @@
     "semantic-release": "semantic-release",
     "outdated": "yarn upgrade-interactive"
   },
+  
   "engines": {
     "node": ">=22.0.0",
     "pnpm": ">=9.0.0"

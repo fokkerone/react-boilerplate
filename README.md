@@ -1,9 +1,6 @@
-![React Redux Boilerplate](https://github.com/marcoturi/react-redux-boilerplate/blob/main/doc/images/react_redux_boilerplate.jpg?raw=true)
+# React Vite Boilerplate
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![MIT License](https://img.shields.io/github/license/marcoturi/react-redux-boilerplate)](https://github.com/alan2207/bulletproof-react/blob/master/LICENCE) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/marcoturi/react-redux-boilerplate/codeql-analysis.yml) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/marcoturi/react-redux-boilerplate/release.yml)
-
-A meticulously crafted, extensible, and robust architecture for constructing production-grade React applications.
-The project aim to provide guidelines on the development key points of a long term React project:
+## What
 
 - A well-defined **folder structure and code organization** for enhanced maintainability and scalability, with particular attention to the possibility of splitting and sharing components across projects.
 - A robust **state management** approach to effectively manage data and maintain application code SOLID
@@ -14,7 +11,7 @@ The project aim to provide guidelines on the development key points of a long te
 
 ## ⚡ Features
 
-- Blazing fast build system: [Vite 6](https://vitejs.dev/) + [React 19 SWC](https://github.com/vitejs/vite-plugin-react-swc) + [Yarn 4](https://yarnpkg.com/getting-started/install) + [TypeScript](https://www.typescriptlang.org) with [absolute imports](https://github.com/aleclarson/vite-tsconfig-paths)
+- Blazing fast build system: [Vite 6](https://vitejs.dev/) + [React 19 SWC](https://github.com/vitejs/vite-plugin-react-swc) + PNPM + [TypeScript](https://www.typescriptlang.org) with [absolute imports](https://github.com/aleclarson/vite-tsconfig-paths)
 - App State: [Redux Toolkit 2](https://redux-toolkit.js.org/)
 - Theme: [Radix](https://www.radix-ui.com/) + [Shadcn/ui](https://ui.shadcn.com/) + [Tailwind 4](https://tailwindcss.com/)
 - Format and Style: [Eslint](https://eslint.org/) + [Prettier](https://prettier.io/) with a [prettier plugin](https://github.com/tailwindlabs/prettier-plugin-tailwindcss) that automatically sorts tailwind classes.
@@ -36,29 +33,31 @@ The project aim to provide guidelines on the development key points of a long te
 ## <a name="start"></a>✨ Getting Started
 
 ```bash
-npx degit marcoturi/react-redux-boilerplate my-app
+npx degit fokkerone/react-boilerplate my-app
 cd my-app
 
 # To enable yarn 4 follow the instruction here: https://yarnpkg.com/getting-started/install
-yarn #Install dependencies.
-yarn create:env #Create a .env file
+pnpm #Install dependencies.
+pnpm create:env #Create a .env file
 ```
 
 ### Common Commands
 
-- `yarn start` - start a development server with hot reload.
-- `yarn build` - build for production. The generated files will be on the `dist` folder.
-- `yarn preview` - locally preview the production build.
-- `yarn test` - run unit and integration tests.
-- `yarn test:coverage` - run unit and integration tests with coverage.
-- `yarn e2e:local` - run E2E test locally. Make sure to run yarn start before in a separate shell.
-- `yarn type-check` - check for typescript errors.
-- `yarn outdated` - update dependencies interactively.
-- `yarn format` - format all files with Prettier.
-- `yarn lint` - runs ESLint.
-- `yarn create:env` - creates default envs.
+- `pnpm start` - start a development server with hot reload.
+- `pnpm build` - build for production. The generated files will be on the `dist` folder.
+- `pnpm preview` - locally preview the production build.
+- `pnpm test` - run unit and integration tests.
+- `pnpm test:coverage` - run unit and integration tests with coverage.
+- `pnpm e2e:local` - run E2E test locally. Make sure to run yarn start before in a separate shell.
+- `pnpm type-check` - check for typescript errors.
+- `pnpm outdated` - update dependencies interactively.
+- `pnpm format` - format all files with Prettier.
+- `pnpm lint` - runs ESLint.
+- `pnpm create:env` - creates default envs.
 
 ## <a name="folder"></a>🗄️ Folder Structure and Code Organization
+
+### Redux
 
 TLDR; Embrace the [vertical slice architecture](https://www.jimmybogard.com/vertical-slice-architecture/)
 
@@ -74,6 +73,8 @@ The vertical slice architecture is the recommended structure. Each feature encap
 Over the years, different structures were born based on different layers of features, including [Atomic design](https://atomicdesign.bradfrost.com/chapter-2/#:~:text=Molecules%20are%20groups%20of%20two,functioning%20together%20as%20a%20unit.) or [Feature slice](https://feature-sliced.design/). However, dividing code into numerous layers of features reduce the developer experience by the constant navigation between multiple folders. Also, the moment you want to move the logic to another package the refactor is also more invasive.
 
 If you need to re-use features across projects, within the following structure is very easy to move the folders in a monorepo package without much re-factoring (thanks also to the usage of alias in imports).
+
+### Domain Driven
 
 ```
 .
@@ -117,8 +118,6 @@ Within a Redux-powered application, responsibilities are meticulously defined:
 - Components: Solely responsible for dispatching actions and displaying data through selectors. No business or domain logic inside.
 - Selectors and Reducers: Encapsulate the application's business and domain logic. Their pure function nature renders them highly testable, reusable through composition, and exceptionally maintainable.
 - [RTK Query](https://redux-toolkit.js.org/rtk-query/overview), [thunks](https://redux-toolkit.js.org/api/createAsyncThunk) and [Listener middleware](https://redux-toolkit.js.org/api/createListenerMiddleware): Orchestrates the management of all side effects.
-
-![Redux flow](https://github.com/marcoturi/react-redux-boilerplate/blob/main/doc/images/redux_architecture.gif?raw=true)
 
 While some may argue that newer state management solutions offer less boilerplate, these often lack a designated location for business code placement. In the React ecosystem, custom hooks provide the cleanest approach for addressing this issue. However, the reliance on custom hooks to encapsulate domain logic in a large team, can quickly lead to an unwieldy codebase, with components ballooning to over 200-300 lines. In my experience, without a clear project-defined location for application domain logic, it inevitably gravitates towards react/ui components, rendering them unmaintainable.
 
@@ -210,18 +209,12 @@ One of the compelling advantages of the architecture presented in this project i
 
 Throughout the development process, the Redux Dev Tools extension for the browser provides real-time insights into the application's state transitions triggered by user interactions. In a production environment, when utilized appropriately (i.e., components dispatch Redux actions without encapsulating any business logic within themselves), we gain the capability to meticulously trace every user action preceding the occurrence of an error or in case we want to track them for analytics purposes:
 
-![Sentry redux actions](https://github.com/marcoturi/react-redux-boilerplate/blob/main/doc/images/redux%20actions.png?raw=true)
-
-Additionally, we can easily track and potentially rehydrate the user's state at the precise moment of the error (screenshot from [sentry](https://github.com/getsentry/sentry-javascript/tree/master/packages/react)):
-
-![Sentry redux state](https://github.com/marcoturi/react-redux-boilerplate/blob/main/doc/images/redux%20state.png?raw=true)
-
 ## <a name="additional-libraries"></a>📚 Additional libraries
 
 - Time and dates: [date-fns](https://github.com/date-fns/date-fns) - [Moment is dead](https://momentjs.com/docs/#/-project-status/). Date-fns is a maintained, fast, functional and modular alternative.
 - Forms: [react-hook-form](https://github.com/react-hook-form/react-hook-form) - Small size with no dependencies, good performance and DX and UX experience.
 - Data manipulation: [ramda](https://github.com/ramda/ramda) - Alternative for lodash that promotes functional programming
-- Logging and monitoring: [Sentry](https://github.com/getsentry/sentry-javascript/tree/master/packages/react)
+- Logging and monitoring: [Faro](https://www.npmjs.com/package/@grafana/faro-react)
 
 ## Contributing
 
