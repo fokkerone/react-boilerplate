@@ -2,7 +2,8 @@ import { version } from '../../../package.json';
 
 const env = {
   VERSION: version,
-  SENTRY_DSN: undefined, // import.meta.env.VITE_SENTRY_DSN,
+  FARO_URL: import.meta.env.VITE_FARO_URL,
+  FARO_APP_NAME: import.meta.env.VITE_FARO_APP_NAME,
   NODE_ENV: import.meta.env.MODE,
   IS_DEV: import.meta.env.MODE === 'development',
   APP_NAME: 'my_app',
